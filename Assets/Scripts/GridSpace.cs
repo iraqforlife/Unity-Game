@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using UnityEngine.UI;
 public class GridSpace : MonoBehaviour {
     public Button button;
@@ -11,5 +12,8 @@ public class GridSpace : MonoBehaviour {
     {
         buttonText.text = playerSide;
         button.interactable = false;
+    }
+    public void Start()
+    {
     }
 }
