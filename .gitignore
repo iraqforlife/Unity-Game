@@ -21,3 +21,8 @@ $RECYCLE.BIN/
 # =========================
 # Operating System Files
 # =========================
+
+/Obj
+.suo
+/Temp
+.dtbcache
