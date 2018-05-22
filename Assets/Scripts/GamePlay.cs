@@ -12,9 +12,12 @@ public class GamePlay : MonoBehaviour
     public int[] _MarkedGrid = new int[9]; // to check winner
     public Button[] _Spaces = new Button[9];
     public Text _TurnDescription;
+    public Text _XScore;
+    public Text _YScore;
     public GameObject _GameGridPanel;
     public GameObject _GameStartPanel;
     public Dropdown _SelectPlayer;
+    public int[] _Scores = new int[3];
     // Use this for initialization
     void Start()
     {
@@ -37,14 +40,15 @@ public class GamePlay : MonoBehaviour
         //check if the game is finished
         if (_TurnCount > 3 && GameOver())
         {
+            _Scores[_Player]++;
             EditorUtility.DisplayDialog("Game Over", "Player " + _Player + " has won the game.", "Peace bro");
-            reset();
+            Reset();
         }
 
         if (_TurnCount > 9)
         {
             EditorUtility.DisplayDialog("Game Over", "No one has won the game.", "Peace bro");
-            reset();
+            Reset();
         }
         else
         {
@@ -76,7 +80,7 @@ public class GamePlay : MonoBehaviour
             || (_Player * 3 == _MarkedGrid[2] + _MarkedGrid[4] + _MarkedGrid[6] && _MarkedGrid[2] != 0 && _MarkedGrid[4] != 0 && _MarkedGrid[6] != 0)
             ;
     }
-    private void reset()
+    private void Reset()
     {
         _TurnCount = 1;
         _GameStartPanel.SetActive(true);
@@ -92,6 +96,8 @@ public class GamePlay : MonoBehaviour
             space.text = string.Empty;
             _Spaces[i].interactable = true;
         }
+        _XScore.text = "X: " + _Scores[1];
+        _YScore.text = "Y: " + _Scores[2];
     }
     private void UpdatePlayerDescriptionText()
     {
@@ -100,7 +106,7 @@ public class GamePlay : MonoBehaviour
     public void StartGameButton()
     {
         _Player = _SelectPlayer.value + 1;
-        reset();
+        Reset();
         UpdatePlayerDescriptionText();
         _TurnDescription.enabled = true;
         _GameStartPanel.SetActive(false);
